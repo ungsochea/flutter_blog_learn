@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterbloglearn/screens/blog_post_details_screen.dart';
 import 'package:flutterbloglearn/services/blog_post_service.dart';
 import 'package:flutterbloglearn/models/blog_post.dart';
 import 'dart:convert';
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
       blogPosts.forEach((blogPost){
         var model = BlogPost();
         model.title = blogPost['title'];
-        model.details = blogPost['title'];
+        model.details = blogPost['detail'];
         model.featureImageUrl = blogPost['featured_image_url'];
         model.category = blogPost['category']['name'];
         model.createdAt = blogPost['created_at'];
@@ -61,13 +62,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
-                        child: Text(snapshot.data[index].title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        child: InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => BlogPostDetailsScreen(blogPost: snapshot.data[index])));
+                            },
+                            child: Text(snapshot.data[index].title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
                       ),
                       Row(
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.all(6.0),
-                            child: Text(snapshot.data[index].category,style: TextStyle(backgroundColor: Colors.black12,fontSize: 16),),
+                            child: InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => BlogPostDetailsScreen(blogPost: snapshot.data[index])));
+                                },
+                                child: Text(snapshot.data[index].category,style: TextStyle(backgroundColor: Colors.black12,fontSize: 16),)),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(6.0),
