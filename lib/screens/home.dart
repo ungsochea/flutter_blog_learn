@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
         model.title = blogPost['title'];
         model.details = blogPost['title'];
         model.featureImageUrl = blogPost['featured_image_url'];
+        model.category = blogPost['category']['name'];
         _list.add(model);
       });
     }
@@ -60,9 +61,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.all(4.0),
                         child: Text(snapshot.data[index].title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                       ),
-                    ],
+                      Text(snapshot.data[index].category,style: TextStyle(backgroundColor: Colors.black12,fontSize: 16),)
+                  ],
                   ),
-                ),);
+                ),
+                );
                 }
             );
           }else{
