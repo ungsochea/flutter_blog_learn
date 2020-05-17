@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterbloglearn/services/blog_post_service.dart';
 import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
@@ -7,8 +8,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  BlogPostService _blogPostService = BlogPostService();
+
   _getAllBlogPost() async{
-    var result = await http.get('https://blog.chea.me/api/posts');
+    var result = await _blogPostService.getAllBlogPost();
     print(result.body);
   }
   @override
