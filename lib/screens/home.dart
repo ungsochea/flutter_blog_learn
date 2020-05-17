@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterbloglearn/services/blog_post_service.dart';
 import 'package:flutterbloglearn/models/blog_post.dart';
 import 'dart:convert';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -24,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
         model.details = blogPost['title'];
         model.featureImageUrl = blogPost['featured_image_url'];
         model.category = blogPost['category']['name'];
+        model.createdAt = blogPost['created_at'];
         _list.add(model);
       });
     }
@@ -61,7 +63,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.all(4.0),
                         child: Text(snapshot.data[index].title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                       ),
-                      Text(snapshot.data[index].category,style: TextStyle(backgroundColor: Colors.black12,fontSize: 16),)
+                      Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: Text(snapshot.data[index].category,style: TextStyle(backgroundColor: Colors.black12,fontSize: 16),),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: Text(DateFormat("dd-MMM-yyyy").format(DateTime.parse(snapshot.data[index].createdAt)),style: TextStyle(backgroundColor: Colors.black12,fontSize: 16.0),),
+                          )
+                        ],
+                      ),
                   ],
                   ),
                 ),

@@ -4,4 +4,5 @@ class BlogPost{
   String details;
   String featureImageUrl;
   String category;
+  String createdAt;
 }
